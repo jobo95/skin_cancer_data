@@ -9,7 +9,7 @@ HOST_NAME = $(shell hostname)
 DOCKER_COMPOSE_COMMAND = docker compose
 
 SERVICE_NAME = app
-CONTAINER_NAME = skin-cancer-data_container
+CONTAINER_NAME = skin-cancer-data-container
 
 DIRS_TO_VALIDATE = skin_cancer
 DOCKER_COMPOSE_RUN = $(DOCKER_COMPOSE_COMMAND) run --rm $(SERVICE_NAME)
@@ -23,7 +23,7 @@ guard-%:
 
 ## Call entrypoint
 version_data: up
-	$(DOCKER_COMPOSE_EXEC) python ./cybulde/version_data.py
+	$(DOCKER_COMPOSE_EXEC) python ./skin_cancer/version-data.py
 
 ## Starts jupyter lab
 notebook: up

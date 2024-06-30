@@ -6,7 +6,7 @@ services:
     hostname: "${HOST_NAME:-jriebold}"
     image: skin_cancer_data
     platform: linux/amd64
-    container_name: skin_cancer_data_container
+    container_name: skin-cancer-data-container
     build:
       context: .
       dockerfile: ./docker/Dockerfile

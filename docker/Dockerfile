@@ -32,6 +32,9 @@ RUN curl -sSL https://install.python-poetry.org | python3 - --version 1.7.1
 
 USER ${USER_NAME}
 
+RUN   git config --global user.email "johannes.riebold@gmx.de" \
+    && git config --global user.name "jobo95"  
+
 COPY pyproject.toml *.lock /app/
 WORKDIR /app
 
