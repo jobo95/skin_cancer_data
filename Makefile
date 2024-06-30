@@ -6,16 +6,12 @@ USER_NAME = $(shell whoami)
 USER_ID = $(shell id -u)
 HOST_NAME = $(shell hostname)
 
-ifeq (, $(shell which docker-compose))
-	DOCKER_COMPOSE_COMMAND = docker compose
-else
-	DOCKER_COMPOSE_COMMAND = docker-compose
-endif
+DOCKER_COMPOSE_COMMAND = docker compose
 
 SERVICE_NAME = app
-CONTAINER_NAME = cybulde-template-container
+CONTAINER_NAME = skin-cancer-data_container
 
-DIRS_TO_VALIDATE = cybulde
+DIRS_TO_VALIDATE = skin_cancer
 DOCKER_COMPOSE_RUN = $(DOCKER_COMPOSE_COMMAND) run --rm $(SERVICE_NAME)
 DOCKER_COMPOSE_EXEC = $(DOCKER_COMPOSE_COMMAND) exec $(SERVICE_NAME)
 
@@ -26,8 +22,8 @@ guard-%:
 	@#$(or ${$*}, $(error $* is not set))
 
 ## Call entrypoint
-entrypoint: up
-	$(DOCKER_COMPOSE_EXEC) python ./cybulde/entrypoint.py
+version_data: up
+	$(DOCKER_COMPOSE_EXEC) python ./cybulde/version_data.py
 
 ## Starts jupyter lab
 notebook: up
