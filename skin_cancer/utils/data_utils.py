@@ -42,7 +42,6 @@ def commit_to_dvc(dvc_raw_data_folder: str, dvc_remote_name: str) -> None:
     DATA_UTILS_LOGGER.info("Added dvc folder")
 
     run_shell_command("git add .")
-    DATA_UTILS_LOGGER.info("Initialize DVC storage...")
 
     run_shell_command(f"git commit -nm 'Updated version of the data from v{current_version} to {next_version}'")
     run_shell_command(f"git tag -a {next_version} -m 'Data version {next_version}'")

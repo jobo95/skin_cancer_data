@@ -1,4 +1,5 @@
 from skin_cancer.config_schemas.config_schema import Config
+from skin_cancer.train_val_test_split_data import create_split_data
 from skin_cancer.utils.config_utils import get_config
 from skin_cancer.utils.data_utils import initialize_dvc, initialize_dvc_storage, make_new_data_version
 
@@ -6,6 +7,12 @@ from skin_cancer.utils.data_utils import initialize_dvc, initialize_dvc_storage,
 @get_config(config_path="../configs", config_name="config")
 def version_data(config: Config) -> None:
     print(config)
+
+    create_split_data(
+        config.csv_path,
+        config.test_split_ratio,
+        config.val_split_ratio,
+    )
 
     initialize_dvc()
 
