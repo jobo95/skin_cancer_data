@@ -45,6 +45,8 @@ def commit_to_dvc(dvc_raw_data_folder: str, dvc_remote_name: str) -> None:
 
     run_shell_command(f"git commit -nm 'Updated version of the data from v{current_version} to {next_version}'")
     run_shell_command(f"git tag -a {next_version} -m 'Data version {next_version}'")
+    
+    DATA_UTILS_LOGGER.info("push dvc folder")
     run_shell_command(f"dvc push {dvc_raw_data_folder}.dvc --remote {dvc_remote_name}")
     run_shell_command("git remote set-url origin git@github.com:jobo95/skin_cancer_data.git")
     run_shell_command("git remote set-url --push origin git@github.com:jobo95/skin_cancer_data.git")
@@ -59,6 +61,7 @@ def make_new_data_version(dvc_raw_data_folder: str, dvc_remote_name: str) -> Non
         if status == "Data and pipelines are up to date.\n":
             DATA_UTILS_LOGGER.info("Data and pipelines are up to date")
             return
+        DATA_UTILS_LOGGER.info("Commit to DVC")
         commit_to_dvc(dvc_raw_data_folder, dvc_remote_name)
 
     except CalledProcessError:
